@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -24,6 +24,7 @@
                     android:id="@+id/photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:minHeight="@dimen/details_image_min_height"
                     android:scaleType="fitXY" />
                 <LinearLayout
                     android:id="@+id/meta_bar"
@@ -39,29 +40,17 @@
 
                     <TextView
                         android:id="@+id/article_title"
-                        style="?android:attr/textAppearanceLarge"
+                        style="@style/Detail.Title.Text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
-                        android:fontFamily="sans-serif-condensed"
-                        android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/detail_title_text_size"
-                        android:lineSpacingMultiplier="0.9" />
+                        android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"/>
 
                     <TextView
                         android:id="@+id/article_byline"
-                        style="?android:attr/textAppearanceSmall"
+                        style="@style/Detail.Sub.Title.Text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#8fff" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="112dp"
-                    android:visibility="gone"
-                    android:background="@drawable/photo_background_protection" />
 
             </FrameLayout>
 
@@ -73,7 +62,7 @@
                 android:maxWidth="@dimen/detail_card_max_width"
                 android:background="#fff"
                 android:elevation="2dp"
-                android:layout_marginTop="@dimen/detail_card_top_margin">
+                android:layout_below="@+id/photo_container">
 
                 <TextView
                     style="@style/Detail.Body.Text"
@@ -87,7 +76,7 @@
                     android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier" />
 
             </com.example.xyzreader.ui.MaxWidthLinearLayout>
-        </FrameLayout>
+        </RelativeLayout>
     </com.example.xyzreader.ui.ObservableScrollView>
 
     <ImageButton android:id="@+id/share_fab"

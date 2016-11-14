@@ -18,11 +18,29 @@
 <resources>
 
     <style name="Theme.Bacon" parent="@style/Theme.AppCompat.Light.NoActionBar">
-
+        <item name="colorAccent">@color/theme_accent</item>
+        <item name="colorPrimary">@color/theme_primary</item>
+        <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+        <item name="android:textColorPrimary">@color/theme_primary_text_color</item>
     </style>
 
     <style name="Theme.Bacon.Detail">
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@android:color/transparent</item>
     </style>
 
+    <style name="Detail.Body.Text" parent="Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/theme_primary_text_color</item>
+        <item name="android:textColorLink">@color/theme_accent</item>
+    </style>
+
+    <style name="Detail.Title.Text" parent="Base.TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">@color/theme_primary_text_color_white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingMultiplier">0.9</item>
+    </style>
+
+    <style name="Detail.Sub.Title.Text" parent="Base.TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/theme_sub_title_text_color</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>
