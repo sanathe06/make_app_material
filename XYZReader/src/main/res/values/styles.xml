@@ -34,7 +34,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.Detail">
-        <item name="colorPrimary">@android:color/transparent</item>
+        <!--<item name="colorPrimary">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
     <style name="Detail.Body.Text" parent="Base.TextAppearance.AppCompat.Subhead">

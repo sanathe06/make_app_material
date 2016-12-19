@@ -17,6 +17,7 @@
                 android:background="?attr/colorPrimary"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:elevation="0dp"
                 app:title="">
                 <FrameLayout
                     android:layout_width="match_parent"

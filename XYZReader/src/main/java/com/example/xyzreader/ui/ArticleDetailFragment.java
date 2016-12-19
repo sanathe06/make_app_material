@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -54,6 +55,7 @@ public class ArticleDetailFragment extends Fragment implements
     private int mScrollY;
     private boolean mIsCard = false;
     private int mStatusBarFullOpacityBottom;
+    private FloatingActionButton mFab;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -101,8 +103,8 @@ public class ArticleDetailFragment extends Fragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_article_detail_2, container, false);
+                             Bundle savedInstanceState) {
+        mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         mDrawInsetsFrameLayout = (DrawInsetsFrameLayout)
                 mRootView.findViewById(R.id.draw_insets_frame_layout);
         mDrawInsetsFrameLayout.setOnInsetsCallback(new DrawInsetsFrameLayout.OnInsetsCallback() {
@@ -128,19 +130,34 @@ public class ArticleDetailFragment extends Fragment implements
 
         mStatusBarColorDrawable = new ColorDrawable(0);
 
-        mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
+        mFab = (FloatingActionButton) mRootView.findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
-                        .setType("text/plain")
-                        .setText("Some sample text")
-                        .getIntent(), getString(R.string.action_share)));
+                shareArticle();
             }
         });
 
         bindViews();
         updateStatusBar();
         return mRootView;
+    }
+
+    public void shareArticle() {
+        startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
+                .setType("text/plain")
+                .setText(getArticleSharingContent())
+                .getIntent(), getString(R.string.action_share)));
+    }
+
+    private CharSequence getArticleSharingContent() {
+        if (mCursor != null) {
+            return String.format(getString(R.string.sharing_template),
+                    mCursor.getString(ArticleLoader.Query.TITLE),
+                    mCursor.getString(ArticleLoader.Query.AUTHOR),
+                    mCursor.getString(ArticleLoader.Query.PHOTO_URL));
+        }
+        return null;
     }
 
     private void updateStatusBar() {
@@ -220,7 +237,7 @@ public class ArticleDetailFragment extends Fragment implements
         } else {
             mRootView.setVisibility(View.GONE);
             titleView.setText("N/A");
-            bylineView.setText("N/A" );
+            bylineView.setText("N/A");
             bodyView.setText("N/A");
         }
     }
